@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.router'])
+var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.router','satellizer'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,8 +23,20 @@ var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starte
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$authProvider) {
+    var commonConfig = {
+      popupOptions: {
+        location: 'no',
+        toolbar: 'yes',
+        width: window.screen.width,
+        height: window.screen.height
+      }
+    };
 
+    $authProvider.facebook(angular.extend({}, commonConfig, {
+      clientId: '620654438092005',
+      url: 'http://localhost:3000/auth/facebook'
+    }));
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -100,6 +112,15 @@ var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starte
       url: '/referals/:referalId',
       views: {
         'tab-referals': {
+          templateUrl: 'templates/referal-detail.html',
+          controller: 'ReferalsDetailCtrl'
+        }
+      }
+    })
+    .state('tab.referals-buy', {
+      url: '/referals/:referalId/:proposalId',
+      views: {
+        'tab-product': {
           templateUrl: 'templates/referal-detail.html',
           controller: 'ReferalsDetailCtrl'
         }

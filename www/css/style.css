@@ -418,3 +418,21 @@ ul {
     opacity: 1;
   }
 }
+.bar-header{
+    color:white;
+  }
+  .bar-stable {
+     color:white;
+  }
+  .bar.bar-stable .title {
+    background-color: #5FB9AD;
+    color: white;
+    
+  }
+  .bar-stable.bar.bar-header {
+    background-color: #5FB9AD;
+    color: white;
+        margin-left: 0px;
+    
+    
+  }

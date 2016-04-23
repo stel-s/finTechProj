@@ -1,0 +1,22 @@
+<style>
+  .bar-header{
+    color:white;
+  }
+  .bar-stable {
+     color:white;
+  }
+</style>
+
+
+<ion-view view-title="Referals">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="category in referals" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+        <!--<img ng-src="{{chat.face}}">-->
+        <h2>{{category.name}}</h2>
+        <!--<p>{{chat.lastText}}</p>-->
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

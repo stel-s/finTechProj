@@ -19,6 +19,7 @@ angular.module('starter.controllers', [])
   //});
 
   $scope.chats = Chats.all();
+  $scope.referals = Chats.getReferals();
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
@@ -37,5 +38,11 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope, $stateParams, Chats) {
   
   $scope.chat = Chats.get($stateParams.chatId);
+  
+})
+.controller('ReferalsCtrl', function($scope, $stateParams, Referals) {
+  
+  $scope.referals = Referals.all();
+  console.log($scope.referals)
   
 })

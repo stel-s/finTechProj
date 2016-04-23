@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.router'])
+var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -87,7 +87,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','u
       }
     }
   })
-
+  .state('tab.referals', {
+        url: '/referals',
+        views: {
+          'tab-referals': {
+            templateUrl: 'templates/tab-referals.html',
+            controller: 'ReferalsCtrl'
+          }
+        }
+      })
+    .state('tab.referals-detail', {
+      url: '/referals/:referalId',
+      views: {
+        'tab-referals': {
+          templateUrl: 'templates/referal-detail.html',
+          controller: 'ReferalsDetailCtrl'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

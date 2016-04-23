@@ -1,10 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl',['$state'], function($scope, $state) {
+.controller('DashCtrl',function($scope, $state) {
   
   $scope.loginClick = function () {
-  $state.go('tab.dash')
-  }
+    $state.go('tab.chats');
+    console.log("sdsds")
+  };
   
 })
 

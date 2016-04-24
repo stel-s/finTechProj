@@ -1,16 +1,21 @@
 /* Empty. Add your own CSS if you like */
+
 body {
   font-family: 'Open Sans', sans-serif;
   background: #e4e7ec;
+  font-weight: 600;
 }
 
 h1, h2, h3, h4, h5, h6 {
+
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
 
 a {
   color: #000;
+
+  font-weight: bold;
 }
 
 ul {
@@ -32,6 +37,8 @@ ul {
 }
 
 .navbar-header {
+
+  font-weight: bold;
   float: left;
   padding-left: 15px;
 }
@@ -464,4 +471,8 @@ ul {
 }
 .tabs {
   background-color:gray;
+}
+.bar.bar-stable .title {
+
+  font-weight: 600;
 }

@@ -126,6 +126,24 @@ var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starte
         }
       }
     })
+    .state('tab.brands', {
+      url: '/brands',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-brands.html',
+          controller: 'BrandsCtrl'
+        }
+      }
+    })
+    .state('tab.brands-detail', {
+      url: '/brands/:brandsId',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/brand-detail.html',
+          controller: 'BrandDetailCtrl'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

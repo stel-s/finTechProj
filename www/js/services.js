@@ -127,7 +127,7 @@ angular.module('starter.services', [])
     getReferals: function() {
       return user.referals;
     },
-    all: function() {
+    getAll: function() {
       return refCategories;
     },
     remove: function(chat) {
@@ -182,3 +182,54 @@ angular.module('starter.services', [])
     }
   }
 })
+
+
+  .factory('Brands',function(){
+
+      var brands =
+   [{
+      id: 0,
+      name: 'Technolodgy',
+      referrals: 12,
+      s: 'img/ben.png'
+    },
+      {
+        id: 1,
+        name: 'Food & Drinks',
+        referrals: 10,
+        imag: 'img/max.png'
+      }, {
+        id: 2,
+        name: 'Fashion',
+        referrals: 1,
+        imag: 'img/adam.jpg'
+      }, {
+        id: 3,
+        name: 'Travel',
+        referrals: 0,
+        imag: 'img/perry.png'
+      }, {
+        id: 4,
+        name: 'Cosmetics',
+        referrals: 0,
+        imag: 'img/mike.png'
+      }];
+
+    return {
+      getAll: function() {
+        return brands;
+      },
+      get: function(chatId) {
+        for (var i = 0; i < brands.length; i++) {
+          if (brands[i].id === parseInt(chatId)) {
+            return brands[i];
+          }
+        }
+        return null;
+      }
+    }
+
+
+
+  })
+

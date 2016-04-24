@@ -462,6 +462,7 @@ ul {
   background: url("../img/ic_home_white_24px.svg") no-repeat;
   height:auto;
   width:100px;
+  background-size:100px;
 }
 .tabs-striped .tabs {
   background-color:#5D5959;
@@ -475,4 +476,14 @@ ul {
 .bar.bar-stable .title {
 
   font-weight: 600;
+}
+.general-nav-bar{
+  background-color:#5FB9AD;
+  color:white;
+  font-weight: 600;
+}
+.photo-button {
+  background-color:#5A6360;
+  width:100%;
+  color:white;
 }

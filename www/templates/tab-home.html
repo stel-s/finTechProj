@@ -1,10 +1,31 @@
 <ion-view view-title="Dashboard">
-  
+
   <ion-content class="padding">
-    
-    <div class="panel-body">
-         
+
+
+    <div class="row poll">
+      <poll poll-data="data.pollData"></poll>
     </div>
-        
+    <div class="row referra-sections">
+      <div class="col-xs-6 needs" ng-click="goTo('needs')">
+        <div class="referra-sections-number"><span class="circle-border">{{data.needs.items}}</span></div>
+        <div>{{data.needs.title}}</div>
+      </div>
+      <div class="col-xs-6 referrals" ng-click="goTo('referrals')">
+        <div class="referra-sections-number"><span class="circle-border">{{data.referrals.items}}</span></div>
+        <div>{{data.referrals.title}}</div>
+      </div>
+      <div class="col-xs-6 brands" ng-click="goTo('brands')">
+        <div class="referra-sections-number"><span class="circle-border">{{data.brands.items}}</span></div>
+        <div>{{data.brands.title}}</div>
+      </div>
+      <div class="col-xs-6 wishlist" ng-click="goTo('wishlist')">
+        <div class="referra-sections-number"><span class="circle-border">{{data.wishlist.items}}</span></div>
+        <div>{{data.wishlist.title}}</div>
+      </div>
+      <div class="start-poll" ng-click="goTo('startPoll')">
+        <img class="start-poll-img" src="./Content/index/images/startpoll.png" />
+      </div>
+    </div>
   </ion-content>
 </ion-view>

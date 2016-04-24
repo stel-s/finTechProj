@@ -1,0 +1,26 @@
+<ion-modal-view>
+
+  <ion-header-bar class="bar general-nav-bar">
+    <h1 class="title" style="color:white">Photos</h1>
+    <button style="color:white" class="button button-icon icon ion-android-close" ng-click="closeModal.hide()"></button>
+    <!--<button style="color:white" class="button button-icon icon" ng-click="closeModal.hide()">Next</button>-->
+
+  </ion-header-bar>
+
+  <ion-content class="padding" scroll="true">
+  <img style="width:100%;height:auto;" ng-src="{{picture}}">
+    <img style="width:100%;height:auto;" ng-if=!picture ng-src="img/Untitled.png">
+   <div class="row">
+     <div class="col">
+    <button class="button photo-button" ng-click="refer()">
+      Refer
+    </button>
+     </div>
+     <div class="col">
+       <button class="button photo-button" ng-click="send()">
+         Send
+       </button>
+     </div>
+   </div>
+  </ion-content>
+</ion-modal-view>

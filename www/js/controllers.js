@@ -27,13 +27,13 @@ angular.module('starter.controllers', [])
     //  return $auth.isAuthenticated();
     //};
   $scope.loginClick = function () {
-    $state.go('tab.chats');
+    $state.go('tab.home');
     console.log("sdsds")
   };
 
 })
 
-.controller('ChatsCtrl', function($scope, Categories) {
+.controller('ChatsCtrl', function($scope, Categories,$ionicModal) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -41,8 +41,84 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+    $scope.getPhoto = function (e) {
+      if(!navigator.camera){
+        $ionicModal.fromTemplateUrl('templates/modal-photo.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          console.log($scope.picture)
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      }else {
+        var options = {
+          quality: 45,
+          targetWidth: 200,
+          targetHeight: 200,
+          destinationType: Camera.DestinationType.DATA_URL,
+          encodingType: Camera.EncodingType.JPEG,
+          sourceType: Camera.PictureSourceType.CAMERA
+        };
+        navigator.camera.getPicture(function (imageData) {
+          console.log(imageData);
+          //$scope.picture = imageData;
+          $scope.picture = "data:image/jpeg;base64," + imageData;
+          $ionicModal.fromTemplateUrl('templates/modal-photo.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+          }).then(function(modal) {
+            console.log($scope.picture)
+            $scope.modal = modal;
+            $scope.modal.show();
+          });
+        }, function (message) {
+          console.log("on fail" + message);
+        }, options);
 
-  $scope.chats = Categories.all();
+      }
+
+      return false;
+
+      $scope.openModal = function() {
+        $scope.modal.show();
+      };
+
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function() {
+        // Execute action
+      });
+    };
+
+    $scope.send = function () {
+      $scope.modal.hide();
+      $ionicModal.fromTemplateUrl('templates/modal-send.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        console.log($scope.picture)
+        $scope.sendModal = modal;
+        $scope.sendModal.show();
+      });
+    }
+    $scope.searchToSendModalClose = function(form) {
+      $scope.searchToSendModal.hide();
+
+
+    };
+
+    $scope.chats = Categories.getAll();
   $scope.referals = Categories.getReferals();
   //$scope.remove = function(chat) {
   //  Chats.remove(chat);
@@ -91,5 +167,6 @@ angular.module('starter.controllers', [])
   .controller('BrandDetailCtrl', function($scope, $stateParams, Brands) {
     $scope.brandDetail = Brands.get($stateParams.brandsId);
     console.log($scope.brandDetail)
+
 
   })

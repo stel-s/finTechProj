@@ -1,0 +1,40 @@
+<ion-modal-view>
+
+  <ion-header-bar class="bar general-nav-bar">
+    <button style="color:white" class="button button-icon icon ion-android-close pull-left" ng-click="modal1.hide()"></button>
+
+    <h1 class="title" style="color:white">Photos</h1>
+    <!--<button style="color:white" class="button button-icon icon" ng-click="closeModal.hide()">Next</button>-->
+
+  </ion-header-bar>
+
+  <ion-content class="padding" scroll="true">
+    <ng-form method="post"  name="loginForm" class="ng-pristine ng-invalid ng-invalid-required">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="email" name="email" ng-model = "userInput.email">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="username" ng-model = "userInput.nickName">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="password" ng-model="userInput.password">
+        </label>
+      </div>
+      <button type="submit" ng-disabled="loginForm.$invalid" style="background-color:#72B4A9;color:white;font-weight: 600;" class="button button-block button-positive" disabled="disabled" ng-click="signUpModal()">
+        Sign Up
+      </button>
+
+
+      <!--<br>-->
+      <!--<p class="text-center text-muted">-->
+        <!--<small>Don't have an account yet? <i ng-click="signUp()">Sign up</i></small>-->
+      <!--</p>-->
+      <!--<div class="signup-or-separator">-->
+        <!--<h6 class="text">or</h6>-->
+        <!--<hr>-->
+      <!--</div>-->
+
+    </ng-form>
+  </ion-content>
+</ion-modal-view>

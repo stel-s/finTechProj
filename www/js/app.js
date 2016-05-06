@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.router','satellizer'])
+var starter = angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services','ui.router','firebase','ionic.service.core', 'ionic.service.push'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,131 +20,263 @@ var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starte
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+
+
+
+    var push = new Ionic.Push({
+      "debug": true,
+      "onNotification": function(notification) {
+      var payload = notification.payload;
+        console.log(notification, payload);
+      },
+      "onRegister": function(data) {
+        console.log(data.token);
+      }
+    });
+
+    push.register(function(token) {
+      console.log("Device token:",token.token);
+    });
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider,$authProvider) {
-    var commonConfig = {
-      popupOptions: {
-        location: 'no',
-        toolbar: 'yes',
-        width: window.screen.width,
-        height: window.screen.height
-      }
-    };
+.config(function($stateProvider, $urlRouterProvider) {
 
-    $authProvider.facebook(angular.extend({}, commonConfig, {
-      clientId: '620654438092005',
-      url: 'http://localhost:3000/auth/facebook'
-    }));
+
+
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  $stateProvider
+  //$stateProvider
+
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
+  //  .state('tab', {
+  //  url: '/tab',
+  //  abstract: true,
+  //  templateUrl: 'templates/tabs.html'
+  //})
+  //
+
+
+
+
+
+
+
 
   // Each tab has its own nav history stack:
+  //
+  //.state('tab.dash', {
+  //  url: '/dash',
+  //  views: {
+  //    'tab-dash': {
+  //      templateUrl: 'templates/tab-home.html',
+  //      controller: 'HomeCtrl'
+  //    }
+  //  }
+  //})
+  //
 
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
+  //  .state('tab.chat-detail', {
+  //    url: '/chats/:chatId',
+  //    views: {
+  //      'tab-chats': {
+  //        templateUrl: 'templates/chat-detail.html',
+  //        controller: 'ChatDetailCtrl'
+  //      }
+  //    }
+  //  })
+  //
+  //
+  //  .state('tab.home', {
+  //    url: '/dash',
+  //    views: {
+  //      'tab-account': {
+  //        templateUrl: 'templates/tab-dash.html',
+  //        controller: 'DashCtrl'
+  //      }
+  //    }
+  //  })
+  //  .state('tab.referals', {
+  //    url: '/referals',
+  //    views: {
+  //      'tab-referals': {
+  //        templateUrl: 'templates/tab-referals.html',
+  //        controller: 'ReferalsCtrl'
+  //      }
+  //    }
+  //  })
+  //  .state('tab.referals-detail', {
+  //    url: '/referals/:referalId',
+  //    views: {
+  //      'tab-referals': {
+  //        templateUrl: 'templates/referal-detail.html',
+  //        controller: 'ReferalsDetailCtrl'
+  //      }
+  //    }
+  //  })
+  //
+  //  .state('tab.brands', {
+  //    url: '/brands',
+  //    views: {
+  //      'tab-chats': {
+  //        templateUrl: 'templates/tab-brands.html',
+  //        controller: 'BrandsCtrl'
+  //      }
+  //    }
+  //  })
+  //  .state('tab.brands-detail', {
+  //    url: '/brands/:brandsId',
+  //    views: {
+  //      'tab-chats': {
+  //        templateUrl: 'templates/brand-detail.html',
+  //        controller: 'BrandDetailCtrl'
+  //      }
+  //    }
+  //  })
+  /// setup an abstract state for the tabs directive
+  //      .state('tab', {
+  //      url: '/tab',
+  //      abstract: true,
+  //      templateUrl: 'templates/tabs.html'
+  //    })
+  //  .state('tab.chats', {
+  //      url: '/chats',
+  //      views: {
+  //        'tab-chats': {
+  //          templateUrl: 'templates/tab-chats.html',
+  //          controller: 'ChatsCtrl'
+  //        }
+  //      }
+  //    })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
+  //
+  //  .state('photo', {
+  //    url: '/photo',
+  //    views: {
+  //      'tab-account': {
+  //        templateUrl: '/templates/tab-photo.html',
+  //       // controller: 'PhotoCtrl'
+  //      }
+  //    }
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-home.html',
-        controller: 'HomeCtrl'
-      }
-    }
-  })
-  .state('tab.referals', {
-        url: '/referals',
+
+    $stateProvider
+      .state('tabs', {
+        url: "/tabs",
+        abstract: true,
+        templateUrl: "templates/tabs.html"
+      })
+      .state('tabs.home', {
+        url: "/home",
         views: {
-          'tab-referals': {
-            templateUrl: 'templates/tab-referals.html',
-            controller: 'ReferalsCtrl'
+          'home-tab': {
+            templateUrl: "templates/tab-home.html",
+            controller: 'HomeCtrl'
           }
         }
       })
-    .state('tab.referals-detail', {
-      url: '/referals/:referalId',
-      views: {
-        'tab-referals': {
-          templateUrl: 'templates/referal-detail.html',
-          controller: 'ReferalsDetailCtrl'
+     .state('tabs.login', {
+        url: '/login',
+
+        views: {
+          'login-tab': {
+            templateUrl: "templates/tab-dash.html",
+            controller: 'DashCtrl'
+          }
         }
-      }
-    })
-    .state('tab.referals-buy', {
-      url: '/referals/:referalId/:proposalId',
-      views: {
-        'tab-product': {
-          templateUrl: 'templates/referal-detail.html',
-          controller: 'ReferalsDetailCtrl'
+      })
+      .state('tabs.photo', {
+        url: '/photo',
+        views: {
+          'photo-tab': {
+            templateUrl: "templates/tab-photo.html",
+            controller: 'PhotoCtrl'
+          }
         }
-      }
-    })
-    .state('tab.brands', {
-      url: '/brands',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-brands.html',
-          controller: 'BrandsCtrl'
+     })
+      .state('tabs.send', {
+        url: '/send',
+        views: {
+          'photo-tab': {
+            templateUrl: "templates/tab-send.html",
+            //controller: 'PhotoCtrl'
+          }
         }
-      }
-    })
-    .state('tab.brands-detail', {
-      url: '/brands/:brandsId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/brand-detail.html',
-          controller: 'BrandDetailCtrl'
+      })
+      .state('tabs.needs', {
+        url: '/needs',
+        views: {
+          'home-tab': {
+            templateUrl: "templates/tab-needs.html",
+            controller: 'NeedsCtrl'
+          }
         }
-      }
-    })
+      })
+      .state('tabs.explore', {
+          url: '/explore',
+          views: {
+            'tab-chats': {
+              templateUrl: 'templates/tab-explore.html',
+              controller: 'ChatsCtrl'
+            }
+          }
+        })
+      .state('tabs.explore-detail', {
+        url: '/explore/:chatId',
+        views: {
+          'tab-chats': {
+            templateUrl: 'templates/chat-detail.html',
+             controller: 'ChatDetailCtrl'
+          }
+        }
+     })
+      //.state('tabs.facts', {
+      //  url: "/facts",
+      //  views: {
+      //    'home-tab': {
+      //      templateUrl: "templates/facts.html"
+      //    }
+      //  }
+      //})
+      //.state('tabs.facts2', {
+      //  url: "/facts2",
+      //  views: {
+      //    'home-tab': {
+      //      templateUrl: "templates/facts2.html"
+      //    }
+      //  }
+      //})
+      //.state('tabs.about', {
+      //  url: "/about",
+      //  views: {
+      //    'about-tab': {
+      //      templateUrl: "templates/about.html"
+      //    }
+      //  }
+      //})
+      //.state('tabs.navstack', {
+      //  url: "/navstack",
+      //  views: {
+      //    'about-tab': {
+      //      templateUrl: "templates/nav-stack.html"
+      //    }
+      //  }
+      //})
+      //.state('tabs.contact', {
+      //  url: "/contact",
+      //  views: {
+      //    'contact-tab': {
+      //      templateUrl: "templates/contact.html"
+      //    }
+      //  }
+      //});
+
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tabs/home');
 
 });

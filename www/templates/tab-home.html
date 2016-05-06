@@ -1,31 +1,101 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="Home">
+  <ion-nav-title>
+    <img style="width:9%;margin-top:2px;"  src="img/logot-login.png">  </ion-nav-title>
+  <!--<ion-slide-box on-slide-changed="slideHasChanged($index)">-->
+    <!--<ion-slide>-->
+      <!--<div class="box blue"><h1>BLUE</h1></div>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<div class="box yellow"><h1>YELLOW</h1></div>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<div class="box pink"><h1>PINK</h1></div>-->
+    <!--</ion-slide>-->
+  <!--</ion-slide-box>-->
+  <ion-slide-box on-slide-changed="slideChanged(index)">
+    <ion-slide>
 
-  <ion-content class="padding">
-
-
-    <div class="row poll">
-      <poll poll-data="data.pollData"></poll>
-    </div>
-    <div class="row referra-sections">
-      <div class="col-xs-6 needs" ng-click="goTo('needs')">
-        <div class="referra-sections-number"><span class="circle-border">{{data.needs.items}}</span></div>
-        <div>{{data.needs.title}}</div>
+      <h3>Thank you for choosing the Awesome App!</h3>
+      <div id="logo">
+        <img src="img/app_icon.png">
       </div>
-      <div class="col-xs-6 referrals" ng-click="goTo('referrals')">
+      <p>
+        We've worked super hard to make you happy.
+      </p>
+      <p>
+        But if you are angry, too bad.
+      </p>
+    </ion-slide>
+    <ion-slide>
+      <div style="height:5vh"></div>
+      <h3>Using Awesome</h3>
+
+      <div id="list">
+        <h5>Just three steps:</h5>
+        <ol>
+          <li>Be awesome</li>
+          <li>Stay awesome</li>
+          <li>There is no step 3</li>
+        </ol>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h3>Any questions?</h3>
+      <p>
+        Too bad!
+      </p>
+    </ion-slide>
+  </ion-slide-box>
+  <div class="row poll">
+    <poll poll-data="data.pollData" ng-click="goTo('needs/200')"></poll>
+  </div>
+    <div class="row">
+
+    </div>
+    <!--<div class="row">-->
+      <!--<div class="col padding" style="background-color: #754AB6;height:5vh;">-->
+
+      <!--</div>-->
+      <!--<div class="col padding" style="background-color: #754AB6;color:white;">-->
+        <!--Referrals-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col padding" style="background-color: #754AB6">-->
+
+      <!--</div>-->
+      <!--<div class="col padding" style="background-color: #754AB6">-->
+
+      <!--</div>-->
+    <!--</div>-->
+   <!-- <div style="height:30vh"></div>-->
+    <div class="referra-sections">
+    <div class="row">
+      <div class="col col-50 needs" ng-click="goTo('needs')">
+        <div class="referra-sections-number"  ng-click="goTo('needs')"><span class="circle-border">{{data.needs.items}}</span></div>
+        <div class="">{{data.needs.title}}</div>
+      </div>
+      <div class="col col-50 referrals" ng-click="goTo('referrals')">
         <div class="referra-sections-number"><span class="circle-border">{{data.referrals.items}}</span></div>
         <div>{{data.referrals.title}}</div>
       </div>
-      <div class="col-xs-6 brands" ng-click="goTo('brands')">
+    </div>
+    <div class="row">
+      <div class="col col-50 brands" ng-click="goTo('brands')">
         <div class="referra-sections-number"><span class="circle-border">{{data.brands.items}}</span></div>
         <div>{{data.brands.title}}</div>
       </div>
-      <div class="col-xs-6 wishlist" ng-click="goTo('wishlist')">
+      <div class="col col-50 wishlist" ng-click="goTo('wishlist')" style="cursor:pointer;">
         <div class="referra-sections-number"><span class="circle-border">{{data.wishlist.items}}</span></div>
         <div>{{data.wishlist.title}}</div>
       </div>
-      <div class="start-poll" ng-click="goTo('startPoll')">
-        <img class="start-poll-img" src="./Content/index/images/startpoll.png" />
-      </div>
     </div>
+    </div>
+  <div class="start-poll" ng-click="goTo('needs/200')" style="top:440px;position:absolute;">
+    <img class="start-poll-img" src="img/startpoll.png" />
+  </div>
+  <!--<div class="start-poll" ng-click="goTo('needs/200')">-->
+      <!--<img class="start-poll-img" src="../../../Content/index/images/startpoll.png" />-->
+    <!--</div>-->
   </ion-content>
 </ion-view>

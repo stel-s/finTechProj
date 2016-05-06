@@ -1,35 +1,45 @@
-<ion-view view-title="Dashboard" >
+<ion-view view-title="Login" >
+  <ion-nav-title>
+    <!--<span style="color:white;">Login</span>-->
+    <img style="width:9%;margin-top:2px;"  src="img/logot-login.png">
 
+  </ion-nav-title>
   <ion-content class="padding" style="background-color:#1A7C6F">
 
-    <div class="panel-body" style="background: url('')">
+    <div class="panel-body" style="background: url('');">
       <div style="width:100%">
-        <img style="margin:0 auto;" class="img img-responsive" src="img/logot-login.png">
+        <img style="margin-left:40px;width:10%;padding:10px" class="img img-responsive" src="img/logot-login.png">
       </div>
-        <h2 class="text-center">Log in</h2>
-        <form method="post" ng-submit="login()" name="loginForm" class="ng-pristine ng-invalid ng-invalid-required">
-          <div class="form-group has-feedback">
-            <input class="form-control input-lg ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="email" ng-model="user.email" placeholder="Email" required="" autofocus="" style="">
-            <span class="ion-at form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input class="form-control input-lg ng-pristine ng-untouched ng-invalid ng-invalid-required" type="password" name="password" ng-model="user.password" placeholder="Password" required="">
-            <span class="ion-key form-control-feedback"></span>
-          </div>
-          <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-lg  btn-block btn-success" disabled="disabled" ng-click="loginClick()" style="color:white">Log in</button>
-          <br>
-          <p class="text-center text-muted">
-            <small>Don't have an account yet? <a href="/#/signup">Sign up</a></small>
-          </p>
-          <div class="signup-or-separator">
-            <h6 class="text">or</h6>
-            <hr>
-          </div>
-        </form>
-        <button class="btn btn-block btn-facebook" >
-          <i class="ion-social-facebook"></i> Sign in with Facebook
+
+      <form method="post" ng-submit="login()" name="loginForm" class="ng-pristine ng-invalid ng-invalid-required">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="email" ng-model="logindetails.email">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="password" type="password" ng-model="logindetails.password">
+          </label>
+        </div>
+        <button type="submit" ng-disabled="loginForm.$invalid" style="background-color:#72B4A9;color:white;font-weight: 600;" class="button button-block button-positive" disabled="disabled" ng-click="loginClick()">
+          Log in
         </button>
-      </div>
+
+
+        <br>
+        <p class="text-center text-muted">
+          <small>Don't have an account yet? <button class="button button-block button-positive" ng-click="signUp()">Sign up</button></small>
+        </p>
+        <!--<div class="signup-or-separator">-->
+          <!--<h6 class="text">or</h6>-->
+          <!--<hr>-->
+        <!--</div>-->
+
+      </form>
+      <!--<button class="btn btn-block btn-facebook" >-->
+        <!--<i class="ion-social-facebook"></i> Sign in with Facebook-->
+      <!--</button>-->
+    </div>
+    <pre>{{ data | json }}</pre>
     <!-- Accent-colored raised button with ripple -->
   </ion-content>
 </ion-view>

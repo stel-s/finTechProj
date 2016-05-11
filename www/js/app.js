@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var starter = angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services','ui.router','firebase','ionic.service.core', 'ionic.service.push'])
+var starter = angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'starter.controllers', 'starter.services','ui.router','firebase','ionic.service.core', 'ionic.service.push'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -217,23 +217,32 @@ var starter = angular.module('starter', ['ionic','ionic.service.core', 'starter.
         }
       })
       .state('tabs.explore', {
-          url: '/explore',
+          url: '/explore/',
           views: {
-            'tab-chats': {
+            'tab-explore': {
               templateUrl: 'templates/tab-explore.html',
-              controller: 'ChatsCtrl'
+              controller: 'ExploreCtrl'
             }
           }
         })
       .state('tabs.explore-detail', {
         url: '/explore/:chatId',
         views: {
-          'tab-chats': {
+          'tab-explore': {
             templateUrl: 'templates/chat-detail.html',
-             controller: 'ChatDetailCtrl'
+             controller: 'ExploreDetailCtrl'
           }
         }
      })
+      .state('tabs.play', {
+        url: '/play',
+        views: {
+          'home-tab': {
+            templateUrl: "templates/tab-play.html",
+            controller: 'PlayCtrl'
+          }
+        }
+      })
       //.state('tabs.facts', {
       //  url: "/facts",
       //  views: {

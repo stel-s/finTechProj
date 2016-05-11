@@ -9,6 +9,18 @@
     templateUrl: "./js/index/poll.html",
     controller: ["$scope", pollCtrl]
   };
+  //  <div class="row">
+  //    <div  class="poll-image">
+  //    <img  class="poll-image-dim" ng-src="{{display.imgUrl}}" />
+  //    </div>
+  //    <div class="poll-cta">
+  //    <div class="poll-cta-owner">Vote {{display.owner}}'s poll</div>
+  //  <div class="poll-cta-timer">
+  //    <i class="icn timelapse pulse pull-left"></i>
+  //    {{remainingTime}}
+  //</div>
+  //</div>
+  //</div>
 
   function pollCtrl($scope) {
 

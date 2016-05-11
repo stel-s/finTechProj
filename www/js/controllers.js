@@ -187,13 +187,65 @@ angular.module('starter.controllers', [])
 
 
 })
-  .controller('ChatsCtrl', function($scope, Categories) {
+  .controller('ExploreCtrl', function($scope, Categories, $cordovaDeviceMotion,$ionicPlatform) {
     $scope.chats = Categories.getAll();
     $scope.referals = Categories.getReferals();
     console.log("df")
+    $scope.dato={};
+    $ionicPlatform.ready(function() {
+      var onError = function (error ) {
+        console.log("error",error)
+      }
+      cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
+      // Enable background mode
+      cordova.plugins.backgroundMode.enable();
 
+      // Called when background mode has been activated
+      cordova.plugins.backgroundMode.onactivate = function () {
+        setTimeout(function () {
+          // Modify the currently displayed notification
+          cordova.plugins.backgroundMode.configure({
+            text:'Running in background for more than 5s now.'
+          });
+        }, 5000);
+      }
+      var successHandler = function (pedometerData) {
+        // pedometerData.startDate; -> ms since 1970
+        // pedometerData.endDate; -> ms since 1970
+        $scope.dato.pedometerData = pedometerData
+        // pedometerData.numberOfSteps;
+        // pedometerData.distance;
+        // pedometerData.floorsAscended;
+        // pedometerData.floorsDescended;
+      };
+      pedometer.startPedometerUpdates(successHandler, onError);
+
+
+      // watch Acceleration
+      var options = { frequency: 200 };
+      var watch = $cordovaDeviceMotion.watchAcceleration(options);
+      watch.then(
+        null,
+        function(error) {
+          // An error occurred
+        },
+        function(result) {
+          var X = result.x;
+          var Y = result.y;
+          var Z = result.z;
+          var timeStamp = result.timestamp;
+
+
+
+          $scope.dato.x = Math.round(X);
+          $scope.dato.y = Math.round(Y);
+          $scope.dato.z = Math.round(Z);
+        });
+
+
+    })
   })
-.controller('PhotoCtrl', function($scope, Categories,$ionicModal,$rootScope) {
+.controller('PhotoCtrl', function($scope, Categories,$ionicModal,$rootScope,$cordovaContacts) {
   //// With the new view caching in Ionic, Controllers are only called
   //// when they are recreated or on app start, instead of every page change.
   //// To listen for when this page is active (for example, to refresh data),
@@ -201,8 +253,14 @@ angular.module('starter.controllers', [])
   ////
   $scope.$on('$ionicView.enter', function(e) {
     console.log("df")
+
   });
 
+    $scope.pickContactUsingNativeUI = function () {
+      $cordovaContacts.pickContact().then(function (contactPicked ) {
+        $scope.contact = contactPicked;
+      })
+    };
 
     var s = $scope.getPhoto = function (e) {
       if(!navigator.camera){
@@ -287,7 +345,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Categories) {
+.controller('ExploreDetailCtrl', function($scope, $stateParams, Categories) {
   $scope.referals = Categories.get($stateParams.chatId);
 
 })
@@ -365,3 +423,16 @@ angular.module('starter.controllers', [])
 
 
   })
+
+  .controller('PlayCtrl', function($scope, $stateParams,$cordovaContacts) {
+    $scope.getAllContacts = function() {
+      $cordovaContacts.find({filter: '', multiple: true}).then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
+        var cont = $scope.contacts = allContacts;
+        console.log(cont);
+      })
+    };
+    console.log("asa")
+    $scope.getAllContacts();
+
+  })
+
